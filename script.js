@@ -1,34 +1,24 @@
 let date = new Date(); 
 let month = date.getMonth(); 
+let year = date.getFullYear();
 let time = document.querySelector(".time"); 
 let weather = document.querySelector(".weather");
 let weatherText = document.querySelector(".weatherText");
 let icons = document.querySelectorAll(".left, .right"); 
-let year = date.getFullYear();
 let today = document.querySelector("div.today");
 let close = document.querySelector(".close");
 let windowVis = document.querySelector(".window"); 
 let events = document.querySelector(".events");
 let exit = document.querySelector(".exit")
-const dateTime = Intl.DateTimeFormat("ru").format(date); //форматирование даты в соответсвии с русским языком
+
 const daysMonth = document.querySelector("div.days"); 
 const monthYear = document.querySelector(".monthYear"); 
 const months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
                 "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
 
+const dateTime = Intl.DateTimeFormat("ru").format(date); //форматирование даты в соответсвии с русским языком
 document.querySelector(".date").innerHTML = dateTime; //генерирование даты в формате ДД.ММ.ГГГГ в <div class="date">
 
-setInterval(() => { //функция генерирования часов
-  let hour = new Date().getHours(); 
-  let min = new Date().getMinutes(); 
-  let sec = new Date().getSeconds(); 
-  
-  hour = (hour < 10) ? "0" + hour : hour; //добавление 0 к часу, который меньше 10
-  min = (min < 10) ? "0" + min : min; //добавление 0 к минутам, которые меньше 10
-  sec = (sec < 10) ? "0" + sec : sec; //добавление 0 к секундам, которые меньше 10
-
-  time.innerHTML = hour + " : " + min + " : " + sec; //запись времени в формате чч : мм : сс
-})
 
 const toDoCalendar = () => { //генерирование календаря
   let firstDayMonth  = new Date(year, month, 0).getDay(); //первый день месяца
@@ -70,18 +60,30 @@ icons.forEach(icon => { //функция для кликабельности и 
   });
 });
 
-  weatherText.addEventListener("click", function () { //открытие виджета погоды
+setInterval(() => { //функция генерирования часов
+  let hour = new Date().getHours(); 
+  let min = new Date().getMinutes(); 
+  let sec = new Date().getSeconds(); 
+  
+  hour = (hour < 10) ? "0" + hour : hour; //добавление 0 к часу, который меньше 10
+  min = (min < 10) ? "0" + min : min; //добавление 0 к минутам, которые меньше 10
+  sec = (sec < 10) ? "0" + sec : sec; //добавление 0 к секундам, которые меньше 10
+
+  time.innerHTML = hour + " : " + min + " : " + sec; //запись времени в формате чч : мм : сс
+})
+
+weatherText.addEventListener("click", function () { //открытие виджета погоды
     windowVis.style.display == "none"
       windowVis.style.display = "block";
     });
-  close.addEventListener("click", function() { //закрытие виджета погоды
+close.addEventListener("click", function() { //закрытие виджета погоды
     windowVis.style.display = "none"
   });
 
-  daysMonth.addEventListener("click", function() { //создание событий
+daysMonth.addEventListener("click", function() { //открытие окна для создания событий
     events.style.visibility = "hidden"
     events.style.visibility = "visible"
   })
-  exit.addEventListener("click", function() { //закрытие поля событий
+exit.addEventListener("click", function() { //закрытие окна
     events.style.visibility = "hidden"
   });
